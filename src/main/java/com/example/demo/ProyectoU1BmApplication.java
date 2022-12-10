@@ -26,8 +26,8 @@ public class ProyectoU1BmApplication implements CommandLineRunner {
 	@Autowired
 	private ITransferenciaService iTransferenciaService;
 	
-	
-public static void main(String[] args) {
+	//Este main es para la parte visual del usuario	
+	public static void main(String[] args) {
 		SpringApplication.run(ProyectoU1BmApplication.class, args);
          
 	}
@@ -51,6 +51,13 @@ public static void main(String[] args) {
 		cuenta2.setSaldo(new BigDecimal(200));
 		this.bancariaService.insertar(cuenta2);
 		
+		System.out.println("///////////////Saldos actuales/////////////////");
+		//Cuentas para consultar
+		CuentaBancaria cuenta_uno_actual = this.bancariaService.bucarPorNumero("0001");
+		CuentaBancaria cuenta_dos_actual = this.bancariaService.bucarPorNumero("0002");
+		
+		System.out.println("Saldo actual: "+cuenta_uno_actual.getSaldo());
+		System.out.println("Saldo actual: "+cuenta_dos_actual.getSaldo());
 		System.out.println("Reporte 1");
 		for(Transferencia t:this.iTransferenciaService.buscarReporte()) {
 			System.out.println(t);	
@@ -63,6 +70,15 @@ public static void main(String[] args) {
 		for(Transferencia t:this.iTransferenciaService.buscarReporte()) {
 			System.out.println(t);	
 		}
+		System.out.println("/////////////////Saldos nuevos////////////////");
+
+		//Cuentas para consultar
+		CuentaBancaria cuenta_uno = this.bancariaService.bucarPorNumero("0001");
+		CuentaBancaria cuenta_dos = this.bancariaService.bucarPorNumero("0002");
+		
+		System.out.println("Nuevo saldo: "+cuenta_uno.getSaldo());
+		System.out.println("Nuevo saldo: "+cuenta_dos.getSaldo());
+		
 		
 	}
 
