@@ -11,6 +11,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import com.example.demo.ejercicio1.modelo.Propietario;
 import com.example.demo.ejercicio1.modelo.Vehiculo;
+import com.example.demo.ejercicio1.service.IGestorMatriculaService;
 import com.example.demo.ejercicio1.service.IMatriculaNuevaService;
 import com.example.demo.ejercicio1.service.IMatriculaService;
 import com.example.demo.ejercicio1.service.IVehiculoService;
@@ -24,13 +25,18 @@ public class ProyectoU1ScApplication implements CommandLineRunner {
 	@Autowired
 	private IpropietarioService ipropietarioService;
 	@Autowired
-	@Qualifier("Pesado")
-	//private IMatriculaService matriculaService;
-	private IMatriculaNuevaService matriculaService;
+	private IGestorMatriculaService gestorMatriculaService; //ctrl +space
 	
-	@Autowired
-	@Qualifier("Liviano")
-	private IMatriculaService matriculaServiceLiviano;
+	
+	
+//	@Autowired
+//	@Qualifier("Pesado")
+//	//private IMatriculaService matriculaService;
+//	private IMatriculaNuevaService matriculaService;
+//	
+//	@Autowired
+//	@Qualifier("Liviano")
+//	private IMatriculaService matriculaServiceLiviano;
 	  
 	public static void main(String[] args) {
 		SpringApplication.run(ProyectoU1ScApplication.class, args);
@@ -45,9 +51,9 @@ public class ProyectoU1ScApplication implements CommandLineRunner {
 		// Opcion1
 		Vehiculo vehi = new Vehiculo();
 		vehi.setMarca("Tocyota");
-		vehi.setPlaca("PSGD2312");
+		vehi.setPlaca("PSD2312");
 		vehi.setPrecio(new BigDecimal(20000));
-		vehi.setTipo("P");
+		vehi.setTipo("L");
 		this.vehiculoService.crear(vehi);
 		vehi.setMarca("Toyota");
 		vehi.setPrecio(new BigDecimal(15000));
@@ -71,8 +77,9 @@ public class ProyectoU1ScApplication implements CommandLineRunner {
 //			this.matriculaServiceLiviano.matricular("1241587458", "PSGD2312");
 //		}
 		// Opcion 3
-		
-		System.out.println(vehi);
+		this.gestorMatriculaService.matricular("1241587458", "PSD2312");
+	
+		//System.out.println(vehi);
 	}
 
 }
